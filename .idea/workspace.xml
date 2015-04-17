@@ -2,46 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ad7584b0-b6b1-4f25-84e4-34fc3e516620" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/bcms_blog/blog_comments/_form.html.erb" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/blog.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.rvmrc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/bcms/blog_comments/_form.html.erb" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/controllers/bcms/blog_comments_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/bcms_blog/blog_comments_controller.rb" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/controllers/bcms/blog_posts_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/bcms_blog/blog_posts_controller.rb" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/controllers/bcms/blogs_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/bcms_blog/blogs_controller.rb" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/controllers/bcms/feeds_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/bcms_blog/feeds_controller.rb" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/helpers/bcms/blog_helper.rb" afterPath="$PROJECT_DIR$/app/helpers/bcms_blog/blog_helper.rb" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/bcms/blog_comments/render.html.erb" afterPath="$PROJECT_DIR$/app/views/bcms_blog/blog_comments/render.html.erb" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/bcms/blog_posts/_form.html.erb" afterPath="$PROJECT_DIR$/app/views/bcms_blog/blog_posts/_form.html.erb" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/bcms/blog_posts/no_access.html.erb" afterPath="$PROJECT_DIR$/app/views/bcms_blog/blog_posts/no_access.html.erb" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/bcms/blog_posts/render.html.erb" afterPath="$PROJECT_DIR$/app/views/bcms_blog/blog_posts/render.html.erb" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/bcms/blogs/_form.html.erb" afterPath="$PROJECT_DIR$/app/views/bcms_blog/blogs/_form.html.erb" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/bcms/blogs/admin_only.html.erb" afterPath="$PROJECT_DIR$/app/views/bcms_blog/blogs/admin_only.html.erb" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/bcms/blogs/render.html.erb" afterPath="$PROJECT_DIR$/app/views/bcms_blog/blogs/render.html.erb" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/bcms/feeds/index.rss.builder" afterPath="$PROJECT_DIR$/app/views/bcms_blog/feeds/index.rss.builder" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/bcms.rb" afterPath="$PROJECT_DIR$/lib/bcms_blog.rb" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/bcms/engine.rb" afterPath="$PROJECT_DIR$/lib/bcms_blog/engine.rb" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/generators/bcms/install/USAGE" afterPath="$PROJECT_DIR$/lib/generators/bcms_blog/install/USAGE" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/lib/generators/bcms/install/install_generator.rb" afterPath="$PROJECT_DIR$/lib/generators/bcms_blog/install/install_generator.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.rakeTasks" afterPath="$PROJECT_DIR$/.idea/.rakeTasks" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20120529184028_v130.rb" afterPath="$PROJECT_DIR$/db/migrate/20120529184028_v130.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Rakefile" afterPath="$PROJECT_DIR$/Rakefile" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/portlets/blog_post/_form.html.erb" afterPath="$PROJECT_DIR$/app/views/portlets/blog_post/_form.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/portlets/blog_posts/_form.html.erb" afterPath="$PROJECT_DIR$/app/views/portlets/blog_posts/_form.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/bcms_blog_test.rb" afterPath="$PROJECT_DIR$/test/bcms_blog_test.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/unit/blog_comment_test.rb" afterPath="$PROJECT_DIR$/test/unit/blog_comment_test.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/unit/blog_observer_test.rb" afterPath="$PROJECT_DIR$/test/unit/blog_observer_test.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/portlets/blog_post_portlet.rb" afterPath="$PROJECT_DIR$/app/portlets/blog_post_portlet.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/unit/blog_post_test.rb" afterPath="$PROJECT_DIR$/test/unit/blog_post_test.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/functional/cms/blog_posts_controller_test.rb" afterPath="$PROJECT_DIR$/test/functional/cms/blog_posts_controller_test.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/portlets/blog_posts_portlet.rb" afterPath="$PROJECT_DIR$/app/portlets/blog_posts_portlet.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/unit/blog_test.rb" afterPath="$PROJECT_DIR$/test/unit/blog_test.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/support/blog_test_helper.rb" afterPath="$PROJECT_DIR$/test/support/blog_test_helper.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/functional/cms/blogs_controller_test.rb" afterPath="$PROJECT_DIR$/test/functional/cms/blogs_controller_test.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/support/factories.rb" afterPath="$PROJECT_DIR$/test/support/factories.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/routes.rb" afterPath="$PROJECT_DIR$/config/routes.rb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bcms_blog.gemspec" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/bcms_blog.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/bcms_blog/blog.rb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/bcms_blog/blog_comment.rb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/bcms_blog/blog_group_membership.rb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/bcms_blog/blog_observer.rb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/bcms_blog/blog_post.rb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/bcms_blog/route_extensions.rb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/bcms_blog/version.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="blog.iws" />
@@ -711,7 +680,13 @@
       <option name="project" value="LOCAL" />
       <updated>1429295591275</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="upgrades to rails 4.1.6">
+      <created>1429299951465</created>
+      <option name="number" value="00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1429299951465</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
