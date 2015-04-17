@@ -12,17 +12,32 @@ end
 
 class CreateBlogs < ActiveRecord::Migration
   def self.up
-    create_versioned_table :blogs do |t|
+    create_table :cms_blog_versions, :force => true do |t|
+      t.integer  :blog_id
+      t.integer  :version
+      t.string   :version_comment
       t.string :name
       t.string :format
       t.text :template
     end
-    
-    create_table :blog_group_memberships do |t|
+
+    add_index "cms_blog_versions", ["blog_id", "version"], :name => "index_cms_blog_versions_on_id_and_version"
+
+    create_table :cms_blogs, :force => true do |t|
+      t.integer  :version
+      t.integer  :lock_version,   :default => 0
+      t.string :name
+      t.string :format
+      t.text :template
+    end
+
+
+
+    create_table :cms_blog_group_memberships do |t|
       t.integer :blog_id
       t.integer :group_id
     end
-    
+
   end
 
   def self.down
@@ -36,9 +51,9 @@ class CreateBlogs < ActiveRecord::Migration
     Cms::ContentType.destroy_all(:name => "Blog")
     Cms::Connector.destroy_all(:connectable_type => "Blog")
 
-    drop_table :blog_versions
-    drop_table :blogs
+    drop_table :cms_blog_versions
+    drop_table :cms_blogs
 
-    drop_table :blog_group_memberships
+    drop_table :cms_blog_group_memberships
   end
 end

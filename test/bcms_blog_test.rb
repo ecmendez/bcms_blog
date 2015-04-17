@@ -1,7 +1,7 @@
 require 'test_helper'
 
-class BcmsBlogTest < ActiveSupport::TestCase
+class BcmsTest < ActiveSupport::TestCase
   test "truth" do
-    assert_kind_of Module, BcmsBlog
+    assert_kind_of Module, Bcms
   end
 end

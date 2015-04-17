@@ -4,7 +4,7 @@ require 'cms/upgrades/v3_5_0'
 class V130 < ActiveRecord::Migration
   def change
     ["Blog", "BlogPost", "BlogComment"].each do |model|
-      v3_5_0_apply_namespace_to_block("BcmsBlog", model)
+      v3_5_0_apply_namespace_to_block("Bcms", model)
     end
     
     rename_table "blog_group_memberships", "bcms_blog_blog_group_memberships"

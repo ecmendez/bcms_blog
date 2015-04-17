@@ -1,7 +1,9 @@
 # This migration comes from cms (originally 20111130221145)
 # Upgrade to Browsercms v3.4.0
-
+require 'cms/upgrades/v3_4_0'
 class Browsercms340 < ActiveRecord::Migration
+  include Cms::Upgrades::V3_4_0::SchemaStatements
+
   def change
     # Namespace class_names where they are not namespaced.
     %w[HtmlBlock Category CategoryType Portlet FileBlock ImageBlock Tag].each do |content_type|
@@ -11,6 +13,7 @@ class Browsercms340 < ActiveRecord::Migration
 
     update_sitemap
     update_files
+    standardize_foreign_keys_from_versions_tables_to_original_table
   end
 
   private
@@ -35,11 +38,7 @@ class Browsercms340 < ActiveRecord::Migration
   end
 
   def update_content_types(name)
-    found = begin 
-      Cms::ContentType.named(name).first
-    rescue Exception => e
-      nil
-    end
+    found = Cms::ContentType.named(name).first
     if found
       found.name = namespace_model(name)
       found.save!
@@ -55,5 +54,10 @@ class Browsercms340 < ActiveRecord::Migration
     end
   end
 
-
+  def standardize_foreign_keys_from_versions_tables_to_original_table
+    models = %w[attachment dynamic_view file_block html_block link page ]
+    models.each do |model|
+      standardize_version_id_column(model)
+    end
+  end
 end

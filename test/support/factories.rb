@@ -10,7 +10,7 @@ FactoryGirl.define do
     m.password "password"
     m.password_confirmation {|a| a.password }
   end
-  
+
   factory :group_type, :class => Cms::GroupType do |m|
     m.sequence(:name) {|n| "TestGroupType#{n}" }
   end
@@ -18,7 +18,7 @@ FactoryGirl.define do
   factory :group, :class => Cms::Group do |m|
     m.sequence(:name) {|n| "TestGroup#{n}" }
   end
-  
+
   factory :permission, :class => Cms::Permission do |m|
     m.sequence(:name) {|n| "TestPermission#{n}" }
   end
@@ -27,19 +27,19 @@ end
 
 # Blog specific factories
 FactoryGirl.define do
-  factory :blog, :class=>BcmsBlog::Blog do |m|
+  factory :blog, :class=>Bcms::Blog do |m|
     m.sequence(:name) {|n| "TestBlog#{n}"}
     m.moderate_comments true
   end
 
-  factory :blog_post, :class=>BcmsBlog::BlogPost do |m|
+  factory :blog_post, :class=>Bcms::BlogPost do |m|
     m.sequence(:name) { |n| "BlogPost#{n}" }
     m.blog {|b| b.association(:blog) }
     m.sequence(:body) { |n| "Lorem ipsum #{n}" }
     m.association :author, :factory => :user
   end
 
-  factory :blog_comment, :class=>BcmsBlog::BlogComment do |m|
+  factory :blog_comment, :class=>Bcms::BlogComment do |m|
     m.name "Just a comment"
     m.body "Nice blog"
     m.association :post, :factory => :blog_post

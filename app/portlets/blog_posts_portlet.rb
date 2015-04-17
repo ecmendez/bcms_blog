@@ -1,7 +1,7 @@
 class BlogPostsPortlet < Cms::Portlet
-  
+
   after_initialize :build_permalink_code
-  
+
   def build_permalink_code
     self.render_blog_post_code
   end
@@ -22,11 +22,11 @@ class BlogPostsPortlet < Cms::Portlet
     Rails.logger.debug "... BlogPostsPortlet#render(options=#{@options.inspect} #{@options.class})"
 
     if @options[:blog_id]
-      finder = BcmsBlog::Blog.find(@options[:blog_id]).posts
+      finder = Bcms::Blog.find(@options[:blog_id]).posts
     elsif @options[:blog_name]
-      finder = BcmsBlog::Blog.find_by_name(@options[:blog_name]).posts
+      finder = Bcms::Blog.find_by_name(@options[:blog_name]).posts
     else
-      finder = BcmsBlog::BlogPost
+      finder = Bcms::BlogPost
     end
 
     if @options[:tags].is_a?(Array) && @options[:tags].size > 1
@@ -35,7 +35,7 @@ class BlogPostsPortlet < Cms::Portlet
     end
 
     finder = finder.published
-    finder = BcmsBlog::Blog.posts_finder(finder, @options)
+    finder = Bcms::Blog.posts_finder(finder, @options)
 
     @blog_posts = finder.all(
       :limit => @options[:limit] || 25,
