@@ -27,19 +27,19 @@ end
 
 # Blog specific factories
 FactoryGirl.define do
-  factory :blog, :class=>Bcms::Blog do |m|
+  factory :bcms_blog, :class=>BcmsBlog::Blog do |m|
     m.sequence(:name) {|n| "TestBlog#{n}"}
     m.moderate_comments true
   end
 
-  factory :blog_post, :class=>Bcms::BlogPost do |m|
+  factory :blog_post, :class=>BcmsBlog::BlogPost do |m|
     m.sequence(:name) { |n| "BlogPost#{n}" }
-    m.blog {|b| b.association(:blog) }
+    m.blog {|b| b.association(:bcms_blog) }
     m.sequence(:body) { |n| "Lorem ipsum #{n}" }
     m.association :author, :factory => :user
   end
 
-  factory :blog_comment, :class=>Bcms::BlogComment do |m|
+  factory :blog_comment, :class=>BcmsBlog::BlogComment do |m|
     m.name "Just a comment"
     m.body "Nice blog"
     m.association :post, :factory => :blog_post

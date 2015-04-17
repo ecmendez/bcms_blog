@@ -1,4 +1,4 @@
-module Bcms
+module BcmsBlog
   module BlogHelper
     # We can't call it 'blog_path' because that would conflict with the actual named route method if there's a blog named "Blog".
     def _blog_path(blog, route_name, route_params)

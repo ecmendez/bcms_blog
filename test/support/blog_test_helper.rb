@@ -24,14 +24,14 @@ module BlogTestHelper
   # Creates data specifically used on tests
   def create_test_data
     template = %q[<% page_title @page_title || @blog.name %><%= render :partial => "partials/blog_post", :collection => @blog_posts %>"]
-    @blog = Bcms::Blog.create!(:name => "MyBlog", :template => template)
+    @blog = BcmsBlog::Blog.create!(:name => "MyBlog", :template => template)
 
     @category_type = CategoryType.find_by_name("Blog Post")
 
     @stuff = Category.create!(:name => "Stuff", :category_type => @category_type)
     @general = Category.create!(:name => "General", :category_type => @category_type)
 
-    opts = {:blog => @blog, :publish_on_save => true}
+    opts = {:bcms_blog => @blog, :publish_on_save => true}
     @first_post = FactoryGirl.create(:blog_post, opts.merge(:category => @general, :published_at => Time.utc(2008, 7, 5, 6), :name => "The first Post"))
     @foo_post_1 = FactoryGirl.create(:blog_post, opts.merge(:category => @stuff,   :published_at => Time.utc(2008, 7, 5, 12), :tag_list => "foo stuff"))
     @foo_post_2 = FactoryGirl.create(:blog_post, opts.merge(:category => @general, :published_at => Time.utc(2008, 7, 21)))

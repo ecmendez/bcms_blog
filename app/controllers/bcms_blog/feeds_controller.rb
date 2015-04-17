@@ -1,4 +1,4 @@
-class Bcms::FeedsController < ApplicationController
+class BcmsBlog::FeedsController < ApplicationController
 
   def index
     @blog = Blog.find(params[:blog_id])

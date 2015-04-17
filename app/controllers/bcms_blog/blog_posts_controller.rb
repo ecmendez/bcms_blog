@@ -1,4 +1,4 @@
-class Bcms::BlogPostsController < Cms::ContentBlockController
+class BcmsBlog::BlogPostsController < Cms::ContentBlockController
   before_filter :show_no_access_if_none_editable
 
   def build_block

@@ -27,8 +27,8 @@ class BlogCommentTest < ActiveSupport::TestCase
   end
   
   test "should be published if  Blog#moderate_comments is false" do
-    blog = create(:blog, :moderate_comments => false)
-    post = create(:blog_post, :blog => blog)
+    blog = create(:bcms_blog, :moderate_comments => false)
+    post = create(:blog_post, :bcms_blog => blog)
     assert create(:blog_comment, :post => post).published?
   end
 end

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-module Bcms
+module BcmsBlog
   class BlogPostTest < ActiveSupport::TestCase
 
     def setup
@@ -17,7 +17,7 @@ module Bcms
     end
 
     test "requires blog_id" do
-      assert build(:blog_post, :blog =>  nil).invalid?
+      assert build(:blog_post, :bcms_blog =>  nil).invalid?
     end
 
     test "requires author_id" do

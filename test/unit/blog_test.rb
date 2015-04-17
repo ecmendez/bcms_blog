@@ -4,7 +4,7 @@ class BlogTest < ActiveSupport::TestCase
   
   def setup
     setup_blog_stubs
-    @blog = create(:blog, :name => 'TestBlog')
+    @blog = create(:bcms_blog, :name => 'TestBlog')
   end
 
   test "creates a valid instance" do
@@ -12,13 +12,13 @@ class BlogTest < ActiveSupport::TestCase
   end
   
   test "requires name" do
-    assert build(:blog, :name => nil).invalid?
+    assert build(:bcms_blog, :name => nil).invalid?
   end
   
   test "should be editable by user" do
     group = create(:group, :group_type  => create(:group_type,:cms_access => true))
     user = create(:user, :groups => [group])
-    blog = build(:blog, :groups => [group])
+    blog = build(:bcms_blog, :groups => [group])
     assert blog.editable_by?(user)
     assert !@blog.editable_by?(user)
   end
@@ -36,7 +36,7 @@ class BlogTest < ActiveSupport::TestCase
                                            :connect_to_page_id => nil,
                                            :connect_to_container => 'main',
                                            :publish_on_save => true).returns(BlogPostPortlet.new)
-    create(:blog, :name => 'Test')
+    create(:bcms_blog, :name => 'Test')
   end
   
 end

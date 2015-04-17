@@ -1,12 +1,12 @@
 require 'test_helper'
 
-module Bcms
+module BcmsBlog
   class BlogsControllerTest < ActionController::TestCase
 
     def setup
       setup_blog_stubs
-      Cms::ContentType.create!(:name => 'Bcms::Blog', :group_name => 'Blog')
-      create(:blog)
+      Cms::ContentType.create!(:name => 'BcmsBlog::Blog', :group_name => 'Blog')
+      create(:bcms_blog)
     end
 
     test "should allow access to admin users" do
