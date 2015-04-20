@@ -1,10 +1,11 @@
 module BcmsBlog
   class Blog < ActiveRecord::Base
+    self.table_name= 'cms_blogs'
     acts_as_content_block
   
-    has_many :posts, ->{where(:published => true).order('published_at desc')}, :class_name => "BlogPost"
+    has_many :posts, ->{where(:published => true).order('published_at desc')}, :class_name => "BcmsBlog::BlogPost"
     has_many :blog_group_memberships
-    has_many :groups, :through => :blog_group_memberships, :class_name=>"Cms::Group"
+    has_many :groups, :through => :blog_group_memberships, :class_name=>'Cms::Group'
 
     # attr_accessible :group_ids
     
@@ -15,7 +16,7 @@ module BcmsBlog
       if user.able_to?(:administrate)
         []
       else
-        include(:groups).where("groups.id IN (?)", user.group_ids.join(","))
+        where("cms_groups.id IN (?)", user.group_ids.join(',')).joins(:groups)
       end
     }
     
@@ -59,7 +60,7 @@ module BcmsBlog
         finder = posts.published_between(@date, @date + 1.year)
       end
 
-      @blog_posts = finder.all(:limit => 25, :order => "published_at desc")
+      @blog_posts = finder.all.order('published_at desc').limit(25) #(:limit => 25, :order => "published_at desc")
       raise ActiveRecord::RecordNotFound.new("No posts found") if @blog_posts.empty?
 
       if params[:category]

@@ -1,10 +1,9 @@
 module BcmsBlog
   class BlogPost < ActiveRecord::Base
+    self.table_name= 'cms_blog_posts'
     acts_as_content_block :taggable => true
 
     has_attachment :file
-
-
     before_save :set_published_at
 
     belongs_to :blog
@@ -85,6 +84,7 @@ module BcmsBlog
       "#{blog.name_for_path}_post"
     end
     def route_params
+
       {:year => year, :month => month, :day => day, :slug => slug}
     end
 

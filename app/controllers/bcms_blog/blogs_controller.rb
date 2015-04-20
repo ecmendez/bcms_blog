@@ -2,7 +2,6 @@ class BcmsBlog::BlogsController < Cms::ContentBlockController
   check_permissions :administrate, :except => :index
 
   def index
-    binding.pry
     if current_user.able_to?(:administrate)
       super
     else
@@ -13,7 +12,7 @@ class BcmsBlog::BlogsController < Cms::ContentBlockController
   private
 
   def object_parameters
-    params.require(:bcms_blog).permit(:name, :group_ids)
+    params.require(:bcms_blog).permit(:group_ids => [])
   end
 end
 
