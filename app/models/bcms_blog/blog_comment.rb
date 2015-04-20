@@ -33,5 +33,9 @@ module BcmsBlog
       created_at.to_s(:date)
     end
 
+    def permitted_params
+      attribute_names.map{|string| string.to_sym}
+    end
+
   end
 end

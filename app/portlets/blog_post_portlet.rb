@@ -3,6 +3,7 @@ class BlogPostPortlet < Cms::Portlet
   enable_template_editor false
 
   def render
+
     scope = BcmsBlog::Blog.find(self.blog_id).posts
     if params[:blog_post_id]
       @blog_post = scope.find(params[:blog_post_id])
@@ -20,12 +21,13 @@ class BlogPostPortlet < Cms::Portlet
 
     pmap = flash[instance_name] || params
     pmap[:blog_comment] ||= {}
-
+    binding.pry
     @blog_comment = @blog_post.comments.build pmap[:blog_comment]
     @blog_comment.errors.add_from_hash flash["#{instance_name}_errors"]
   end
 
   def create_comment
+    binding.pry
     work_around_cms_3_3_bug_where_current_user_is_not_correctly_set
 
     params[:blog_comment].merge! :ip => request.remote_ip
@@ -55,4 +57,7 @@ class BlogPostPortlet < Cms::Portlet
     page.name = post.name
   end
 
+  def blog_comment_params
+    params.require(:blog_comment).permit(BcmsBlog::BlogComment.permitted_params)
+  end
 end

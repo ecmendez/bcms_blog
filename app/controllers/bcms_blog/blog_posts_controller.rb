@@ -27,7 +27,7 @@ class BcmsBlog::BlogPostsController < Cms::ContentBlockController
     # If the current user is not able to edit any blog, just show them a page saying so
     def show_no_access_if_none_editable
       if BcmsBlog::Blog.editable_by(current_user).empty?
-        render :action => "no_access"
+        render :action => 'no_access'
       end
     end
 
@@ -38,9 +38,4 @@ class BcmsBlog::BlogPostsController < Cms::ContentBlockController
       end
     end
 
-  private
-
-  def object_parameters
-
-  end
 end

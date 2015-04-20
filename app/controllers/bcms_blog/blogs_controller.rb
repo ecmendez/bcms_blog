@@ -5,7 +5,7 @@ class BcmsBlog::BlogsController < Cms::ContentBlockController
     if current_user.able_to?(:administrate)
       super
     else
-      render :action => "admin_only"
+      render :action => 'admin_only'
     end
   end
 
