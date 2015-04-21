@@ -14,9 +14,9 @@ module BcmsBlog
       auto_discovery_link_tag(:rss, main_app.blog_feeds_url(:blog_id => blog), :title => "#{blog.name}")
     end
   
-    def new_comment_params(portlet)
-      {:url=> Cms::Engine.routes.url_helpers.portlet_handler_path(:id=>portlet.id, :handler=>'create_comment'), 
-      :method=>'post'}
-    end
+    # def new_comment_params(portlet)
+    #   {:url=> Cms::Engine.routes.url_helpers.portlet_handler_path(:id=>portlet.id, :handler=>'create_comment'),
+    #   :method=>'post'}
+    # end
   end
 end

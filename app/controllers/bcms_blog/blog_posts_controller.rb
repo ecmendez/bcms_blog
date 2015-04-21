@@ -2,22 +2,17 @@ class BcmsBlog::BlogPostsController < Cms::ContentBlockController
   before_filter :show_no_access_if_none_editable
 
   def build_block
-    binding.pry
     super
     ensure_blog_editable
     @block.author = current_user
   end
 
   def load_block
-    binding.pry
-
     super
     ensure_blog_editable
   end
 
   def load_blocks
-    binding.pry
-
     super
     @blocks.to_a.delete_if { |b| !b.editable_by?(current_user) }
   end

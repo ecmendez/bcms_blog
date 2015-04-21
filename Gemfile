@@ -11,7 +11,6 @@ end
 
 #rails 4 changes
 gem 'browsercms', git: 'https://github.com/jamesprior/browsercms' # for now, it has important changes
-gem 'acts_as_versioned', :git => 'https://github.com/asee/acts_as_versioned'
 gem 'coffee-rails'
 gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier'
@@ -27,4 +26,4 @@ gem 'actionpack-action_caching'
 gem 'activerecord-deprecated_finders'
 
 gemspec
-# gem "bcms_blog"
+

@@ -21,17 +21,14 @@ class BlogPostPortlet < Cms::Portlet
 
     pmap = flash[instance_name] || params
     pmap[:blog_comment] ||= {}
-    binding.pry
-    @blog_comment = @blog_post.comments.build pmap[:blog_comment]
+    @blog_comment = @blog_post.comments.build(blog_comment_params)
     @blog_comment.errors.add_from_hash flash["#{instance_name}_errors"]
   end
 
   def create_comment
-    binding.pry
-    work_around_cms_3_3_bug_where_current_user_is_not_correctly_set
-
+    # work_around_cms_3_3_bug_where_current_user_is_not_correctly_set
     params[:blog_comment].merge! :ip => request.remote_ip
-    blog_comment = BcmsBlog::BlogComment.new(params[:blog_comment])
+    blog_comment = BcmsBlog::BlogComment.create(blog_comment_params)
     if blog_comment.valid? && blog_comment.save
       url_for_success
     else
@@ -44,6 +41,7 @@ class BlogPostPortlet < Cms::Portlet
   private
 
   def work_around_cms_3_3_bug_where_current_user_is_not_correctly_set
+    binding.pry
     Cms::User.current = current_user
   end
 
@@ -58,6 +56,6 @@ class BlogPostPortlet < Cms::Portlet
   end
 
   def blog_comment_params
-    params.require(:blog_comment).permit(BcmsBlog::BlogComment.permitted_params)
+    params[:blog_comment].permit(BcmsBlog::BlogComment.permitted_params)
   end
 end

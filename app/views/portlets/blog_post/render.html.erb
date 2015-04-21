@@ -7,7 +7,7 @@
 <%= render :partial => "partials/blog_post", :object => @blog_post %>
 
 <div class="blog_comment_form">
-  <%= cms_form_for @blog_comment, :url => new_comment_params(@portlet), :method=>'get' do |f| %>
+  <%= cms_form_for @blog_comment, :url => cms.portlet_handler_path(:id=>@portlet.id, :handler=>'create_comment') do |f| %>
 
     <%= f.hidden_field :post_id %>
     <%= f.cms_error_messages %>
