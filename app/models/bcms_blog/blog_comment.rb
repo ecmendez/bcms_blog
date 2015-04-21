@@ -1,6 +1,8 @@
 module BcmsBlog
   class BlogComment < ActiveRecord::Base
     self.table_name= 'cms_blog_comments'
+    is_versioned
+
     acts_as_content_block :is_searachable => "body"
     belongs_to :post, :class_name => "BcmsBlog::BlogPost", :counter_cache => "comments_count"
 
@@ -9,7 +11,7 @@ module BcmsBlog
     before_create :publish_if_comments_are_enabled
   
     def publish_if_comments_are_enabled
-      self.published = true unless post.blog.moderate_comments?
+      self.published = !post.blog.moderate_comments?
     end
 
     def self.default_order
