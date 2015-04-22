@@ -13,7 +13,7 @@ module BcmsBlog
     validates_uniqueness_of :name
 
     scope :editable_by, lambda { |user|
-      user.able_to?(:edit_content) ? where("cms_groups.id IN (?)", user.group_ids.join(',')).joins(:groups) : []
+      user.able_to?(:edit_content) ? where("cms_groups.id IN (#{user.group_ids.join(',')})").joins(:groups) : []
     }
     
     def self.default_template
