@@ -36,7 +36,7 @@ module BcmsBlog
     end
 
     def self.permitted_params
-      [:post_id, :author, :email, :url, :ip, :body, :version, :lock_version, :name, :published, :deleted, :archived]
+      attribute_names.map{|string| string.to_sym}
     end
 
   end

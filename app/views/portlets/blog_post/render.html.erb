@@ -11,25 +11,25 @@
 
     <%= f.hidden_field :post_id %>
     <%= f.cms_error_messages %>
-    <div class="fields text_fields">
+    <p class="fields text_fields">
       <%= f.label :author, 'Name *' %>
       <%= f.text_field :author %>
-    </div>
-    <div class="fields text_fields">
+    </p>
+    <p class="fields text_fields">
       <%= f.label :email, 'E-mail address' %>
       <%= f.text_field :email %>
-    </div>
-    <div class="fields text_fields">
+    </p>
+    <p class="fields text_fields">
       <%= f.label :url, 'Web site' %>
       <%= f.text_field :url %>
-    </div>
-    <div class="fields text_editor_fields">
+    </p>
+    <p class="fields text_editor_fields">
       <%= f.label :body, 'Body *' %>
       <br/>
       <%= f.text_area :body, :size => "50x5", :style => 'height: auto'  %>
-    </div>
-    <div class="buttons clear">
+    </p>
+    <p class="buttons clear">
       <%= submit_tag "Submit comment" %>
-    </div>
+    </p>
   <% end %>
 </div>
