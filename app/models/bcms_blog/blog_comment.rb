@@ -1,17 +1,17 @@
 module BcmsBlog
   class BlogComment < ActiveRecord::Base
     self.table_name= 'cms_blog_comments'
-    is_versioned
 
     acts_as_content_block :is_searachable => "body"
-    belongs_to :post, :class_name => "BcmsBlog::BlogPost", :counter_cache => "comments_count"
+    belongs_to :post, :class_name => "BlogPost", :counter_cache => "comments_count"
 
     validates_presence_of :post_id, :author, :body
   
     before_create :publish_if_comments_are_enabled
   
     def publish_if_comments_are_enabled
-      self.published = !post.blog.moderate_comments?
+      self.publish_on_save = !post.blog.moderate_comments?
+      return true
     end
 
     def self.default_order
@@ -35,8 +35,8 @@ module BcmsBlog
       created_at.to_s(:date)
     end
 
-    def permitted_params
-      attribute_names.map{|string| string.to_sym}
+    def self.permitted_params
+      [:post_id, :author, :email, :url, :ip, :body, :version, :lock_version, :name, :published, :deleted, :archived]
     end
 
   end

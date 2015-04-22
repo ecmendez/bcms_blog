@@ -29,6 +29,7 @@ class BlogPostPortlet < Cms::Portlet
     # work_around_cms_3_3_bug_where_current_user_is_not_correctly_set
     params[:blog_comment].merge! :ip => request.remote_ip
     blog_comment = BcmsBlog::BlogComment.new(blog_comment_params)
+
     if blog_comment.valid? && blog_comment.save
       url_for_success
     else
@@ -39,9 +40,10 @@ class BlogPostPortlet < Cms::Portlet
   end
 
   private
-
+  # TODO: remove this method and its call in the method above if it is working everything so far
   def work_around_cms_3_3_bug_where_current_user_is_not_correctly_set
-    Cms::User.current = current_user
+    # Cms::User.current = current_user
+    Cms::PersistentUser.current = Cms::User.current
   end
 
   # This is a work around for a bug in bcms 3.3 where the Cms::PageHelper#page_title doesnt
