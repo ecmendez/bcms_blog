@@ -61,16 +61,13 @@ module BcmsBlog
     end
 
     def self.default_order
-      "created_at desc"
+      'created_at desc'
     end
 
     def self.columns_for_index
-      [ {:label => "Name", :method => :name, :order => "name" },
-        {:label => "Published At", :method => :published_label, :order => "published_at" } ]
-    end
-
-    def published_label
-      published_at ? published_at.to_s(:date) : nil
+      [ {:label => 'Name', :method => :name, :order => 'name' },
+        {:label => 'Blog (order by id)', :method => :blog_name, :order => 'blog_id' },
+        {:label => 'Published At', :method => :published_label, :order => 'published_at' } ]
     end
 
     def set_slug
@@ -80,11 +77,12 @@ module BcmsBlog
     def path
       send("#{blog.name_for_path}_post_path", route_params)
     end
+
     def route_name
       "#{blog.name_for_path}_post"
     end
-    def route_params
 
+    def route_params
       {:year => year, :month => month, :day => day, :slug => slug}
     end
 
@@ -104,5 +102,16 @@ module BcmsBlog
     def attachment
       !file.blank?
     end
+
+    private
+
+    def published_label
+      published_at ? published_at.to_s(:date) : nil
+    end
+
+    def blog_name
+      self.blog.name
+    end
+
   end
 end

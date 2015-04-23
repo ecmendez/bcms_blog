@@ -24,20 +24,35 @@ module BcmsBlog
 
     def self.columns_for_index
       [ {:label => "Comment",    :method => :name,                 :order => "body" },
+        {:label => "Post (order by id)",    :method => :post_name, :order => "post_id" },
+        {:label => "Blog",    :method => :blog_name},
         {:label => "Created At", :method => :formatted_created_at, :order => "created_at"} ]
     end
 
+
+
+    def self.permitted_params
+      attribute_names.map{|string| string.to_sym}
+    end
+
+    private
+
     def name
       body ? body[0..50] : ""
+    end
+
+    def post_name
+      self.post.name
+    end
+
+    def blog_name
+      self.post.blog.name
     end
 
     def formatted_created_at
       created_at.to_s(:date)
     end
 
-    def self.permitted_params
-      attribute_names.map{|string| string.to_sym}
-    end
 
   end
 end
