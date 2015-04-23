@@ -13,10 +13,10 @@
       <%= image_tag blog_post.attachment.file_path %>
     </div>
   <% end %>
-
-  <h2><%= link_to h(blog_post.name), href = _blog_post_path(blog_post) %></h2>
+  <% href_link = blog_post.published? ? _blog_post_path(blog_post) : '' %>
+  <h2><%= link_to h(blog_post.name), href = href_link %></h2>
   
-  <div class="date"><%= blog_post.published_at.to_s(:long) %></div>
+  <div class="date"><%= blog_post.published_at.to_s(:long) if blog_post.published? %></div>
   
   <div class="body">
     <% if showing_individual_post or blog_post.summary.blank? %>
@@ -43,7 +43,7 @@
       <strong>|</strong>
     <% end %>
     
-    <%= link_to h(pluralize(blog_post.comments.published.count, "Comment")), "#{_blog_post_path(blog_post)}#comments" %>
+    <%= link_to h(pluralize(blog_post.comments.published.count, "Comment")), "#{href_link}#comments" %>
   </div>
   
   <br />
