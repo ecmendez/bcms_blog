@@ -8,11 +8,16 @@ class BcmsBlog::InstallGenerator < Cms::ModuleInstallation
   end
     
   def add_seed_data_to_project
-    copy_file "../bcms_blog.seeds.rb", "db/bcms_blog.seeds.rb"
-    append_to_file "db/seeds.rb", "\nload File.expand_path('../bcms_blog.seeds.rb', __FILE__)\n"
+    # copy_file "../bcms_blog.seeds.rb", "db/bcms_blog.seeds.rb"
+    # append_to_file "db/seeds.rb", "\nload File.expand_path('../bcms_blog.seeds.rb', __FILE__)\n"
   end
 
   def add_routes
     route 'mount_bcms_blog'
+    route 'namespace :bcms_blog do
+              content_blocks :blogs
+              content_blocks :blog_posts
+              content_blocks :blog_comments
+           end'
   end
 end
