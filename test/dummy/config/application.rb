@@ -7,7 +7,7 @@ if defined?(Bundler)
   # you've limited to :test, :development, or :production.
   Bundler.require(:default, Rails.env, :asee)
 end
-require "bcms"
+require "bcms_blog"
 
 module Dummy
   class Application < Rails::Application

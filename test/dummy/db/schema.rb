@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20120813180110) do
+ActiveRecord::Schema.define(version: 20150423212842) do
 
   create_table "cms_attachment_versions", force: true do |t|
     t.integer  "original_record_id"
@@ -63,6 +63,54 @@ ActiveRecord::Schema.define(version: 20120813180110) do
     t.string   "cardinality"
   end
 
+  create_table "cms_blog_comment_versions", force: true do |t|
+    t.integer  "post_id"
+    t.string   "author"
+    t.string   "email"
+    t.string   "url"
+    t.string   "ip"
+    t.text     "body"
+    t.integer  "original_record_id"
+    t.integer  "version"
+    t.string   "name"
+    t.boolean  "published",          default: false
+    t.boolean  "deleted",            default: false
+    t.boolean  "archived",           default: false
+    t.string   "version_comment"
+    t.integer  "created_by_id"
+    t.integer  "updated_by_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "cms_blog_comment_versions", ["original_record_id"], name: "index_cms_blog_comment_versions_on_original_record_id", using: :btree
+
+  create_table "cms_blog_comments", force: true do |t|
+    t.integer  "post_id"
+    t.string   "author"
+    t.string   "email"
+    t.string   "url"
+    t.string   "ip"
+    t.text     "body"
+    t.integer  "version"
+    t.integer  "lock_version",  default: 0
+    t.string   "name"
+    t.boolean  "published",     default: false
+    t.boolean  "deleted",       default: false
+    t.boolean  "archived",      default: false
+    t.integer  "created_by_id"
+    t.integer  "updated_by_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "cms_blog_comments", ["version"], name: "index_cms_blog_comments_on_version", using: :btree
+
+  create_table "cms_blog_group_memberships", force: true do |t|
+    t.integer "blog_id"
+    t.integer "group_id"
+  end
+
   create_table "cms_blog_items", force: true do |t|
     t.string   "title"
     t.string   "url"
@@ -78,6 +126,94 @@ ActiveRecord::Schema.define(version: 20120813180110) do
     t.datetime "updated_at"
     t.date     "publish_date",  default: '2011-12-08'
   end
+
+  create_table "cms_blog_post_versions", force: true do |t|
+    t.integer  "blog_id"
+    t.integer  "author_id"
+    t.integer  "category_id"
+    t.string   "name"
+    t.string   "slug"
+    t.text     "summary"
+    t.text     "body"
+    t.integer  "comments_count"
+    t.datetime "published_at"
+    t.integer  "attachment_id"
+    t.integer  "attachment_version"
+    t.integer  "original_record_id"
+    t.integer  "version"
+    t.boolean  "published",          default: false
+    t.boolean  "deleted",            default: false
+    t.boolean  "archived",           default: false
+    t.string   "version_comment"
+    t.integer  "created_by_id"
+    t.integer  "updated_by_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "cms_blog_post_versions", ["original_record_id"], name: "index_cms_blog_post_versions_on_original_record_id", using: :btree
+
+  create_table "cms_blog_posts", force: true do |t|
+    t.integer  "blog_id"
+    t.integer  "author_id"
+    t.integer  "category_id"
+    t.string   "name"
+    t.string   "slug"
+    t.text     "summary"
+    t.text     "body"
+    t.integer  "comments_count"
+    t.datetime "published_at"
+    t.integer  "attachment_id"
+    t.integer  "attachment_version"
+    t.integer  "version"
+    t.integer  "lock_version",       default: 0
+    t.boolean  "published",          default: false
+    t.boolean  "deleted",            default: false
+    t.boolean  "archived",           default: false
+    t.integer  "created_by_id"
+    t.integer  "updated_by_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "cms_blog_posts", ["version"], name: "index_cms_blog_posts_on_version", using: :btree
+
+  create_table "cms_blog_versions", force: true do |t|
+    t.string   "name"
+    t.string   "format"
+    t.text     "template"
+    t.boolean  "moderate_comments",  default: true
+    t.integer  "original_record_id"
+    t.integer  "version"
+    t.boolean  "published",          default: false
+    t.boolean  "deleted",            default: false
+    t.boolean  "archived",           default: false
+    t.string   "version_comment"
+    t.integer  "created_by_id"
+    t.integer  "updated_by_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "cms_blog_versions", ["original_record_id"], name: "index_cms_blog_versions_on_original_record_id", using: :btree
+
+  create_table "cms_blogs", force: true do |t|
+    t.string   "name"
+    t.string   "format"
+    t.text     "template"
+    t.boolean  "moderate_comments", default: true
+    t.integer  "version"
+    t.integer  "lock_version",      default: 0
+    t.boolean  "published",         default: false
+    t.boolean  "deleted",           default: false
+    t.boolean  "archived",          default: false
+    t.integer  "created_by_id"
+    t.integer  "updated_by_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "cms_blogs", ["version"], name: "index_cms_blogs_on_version", using: :btree
 
   create_table "cms_categories", force: true do |t|
     t.integer  "category_type_id"
@@ -593,26 +729,31 @@ ActiveRecord::Schema.define(version: 20120813180110) do
   add_index "cms_user_group_memberships", ["user_id"], name: "index_cms_user_group_memberships_on_user_id", using: :btree
 
   create_table "cms_users", force: true do |t|
-    t.string   "login",                  limit: 40
-    t.string   "first_name",             limit: 40
-    t.string   "last_name",              limit: 40
-    t.string   "email",                  limit: 40
-    t.string   "salt",                   limit: 40
+    t.string   "login",                     limit: 40
+    t.string   "first_name",                limit: 40
+    t.string   "last_name",                 limit: 40
+    t.string   "email",                     limit: 40
+    t.string   "crypted_password",          limit: 40
+    t.string   "salt",                      limit: 40
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "expires_at"
-    t.datetime "remember_created_at"
-    t.string   "reset_password_token"
-    t.string   "encrypted_password",                default: "",          null: false
-    t.datetime "reset_password_sent_at"
-    t.string   "type",                              default: "Cms::User"
-    t.string   "source"
-    t.text     "external_data"
+    t.string   "remember_token",            limit: 40
+    t.datetime "remember_token_expires_at"
+    t.string   "reset_token"
   end
 
-  add_index "cms_users", ["email"], name: "index_cms_users_on_email", unique: true, using: :btree
-  add_index "cms_users", ["expires_at"], name: "index_cms_users_on_expires_at", using: :btree
   add_index "cms_users", ["login"], name: "index_cms_users_on_login", unique: true, using: :btree
-  add_index "cms_users", ["reset_password_token"], name: "index_cms_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "likes", force: true do |t|
+    t.string   "liker_type"
+    t.integer  "liker_id"
+    t.string   "likeable_type"
+    t.integer  "likeable_id"
+    t.datetime "created_at"
+  end
+
+  add_index "likes", ["likeable_id", "likeable_type"], name: "fk_likeables", using: :btree
+  add_index "likes", ["liker_id", "liker_type"], name: "fk_likes", using: :btree
 
 end
