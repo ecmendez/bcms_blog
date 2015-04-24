@@ -1,6 +1,6 @@
 module BcmsBlog
   class BlogObserver < ActiveRecord::Observer
-  
+
     def after_create(blog)
       @blog = blog
       create_section_pages_and_routes
@@ -17,6 +17,7 @@ module BcmsBlog
       if blog.persisted?
         update_section_pages_and_route(blog)
       end
+      return true
     end
 
     private

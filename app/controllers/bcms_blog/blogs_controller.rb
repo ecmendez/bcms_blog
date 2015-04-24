@@ -11,8 +11,23 @@ class BcmsBlog::BlogsController < Cms::ContentBlockController
 
   private
 
-  def object_parameters
-    params.require(:bcms_blog).permit(:group_ids => [])
+  def blog_params
+    params.require(:blog).permit(
+        :name,
+        :format,
+        :template,
+        :moderate_comments,
+        :version,
+        :lock_version,
+        :published,
+        :deleted,
+        :archived,
+        :created_by_id,
+        :updated_by_id,
+        :created_at,
+        :updated_at,
+        :group_ids => []
+    )
   end
 end
 
