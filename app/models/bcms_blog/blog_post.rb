@@ -2,15 +2,15 @@ module BcmsBlog
   class BlogPost < ActiveRecord::Base
     self.table_name= 'cms_blog_posts'
     acts_as_content_block :taggable => true
-
+    # acts_as_likeable
     has_attachment :file
-    before_save :set_published_at
 
     belongs_to :blog
     belongs_to_category
-    belongs_to :author, :class_name => "Cms::User"
+    belongs_to :author, :class_name => "Cms::PersistentUser"
     has_many :comments, :class_name => "BlogComment", :foreign_key => "post_id"
 
+    before_save :set_published_at
     before_validation :set_slug
     validates_presence_of :name, :slug, :blog_id, :author_id
 
@@ -39,8 +39,9 @@ module BcmsBlog
     delegate :editable_by?, :to => :blog
 
     def set_published_at
-      if !published_at && publish_on_save
+      if !published_at && published
         self.published_at = Time.now
+        return true
       end
     end
 

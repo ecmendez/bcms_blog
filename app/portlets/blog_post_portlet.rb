@@ -43,7 +43,7 @@ class BlogPostPortlet < Cms::Portlet
   # TODO: remove this method and its call in the method above if it is working everything so far
   def work_around_cms_3_3_bug_where_current_user_is_not_correctly_set
     # Cms::User.current = current_user
-    Cms::PersistentUser.current = Cms::User.current
+    Cms::PersistentUser.current = current_user
   end
 
   # This is a work around for a bug in bcms 3.3 where the Cms::PageHelper#page_title doesnt
