@@ -1,5 +1,5 @@
 <% if @portlet.show_posts_as == 'post'%>
-<%= render :partial => '/partials/blog_post', :collection => @blog_posts, :locals => {:show_full_posts => @options[:show_full_posts]} %>
+<%= render :partial => '/bcms_blog/partials/blog_post', :collection => @blog_posts, :locals => {:show_full_posts => @options[:show_full_posts]} %>
 <% elsif @portlet.show_posts_as == 'link' %>
   <ul id="blog_posts">
 	<% @blog_posts.each do |blog_post| %>

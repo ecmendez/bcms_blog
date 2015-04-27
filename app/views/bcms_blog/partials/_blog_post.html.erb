@@ -1,11 +1,6 @@
 <%
-  # _counter is defined only if we pass :collection to the partial
-  if defined?(blog_post_counter)
-    showing_individual_post = false
-  else
-    showing_individual_post = true
-    blog_post_counter = 0
-  end
+   # params[:slug] is defined only if we pass :collection to the partial
+   showing_individual_post = params.include?(:slug)
 %>
 <div id="blog_post_<%= blog_post.id %>" class="blog_post">
   <% if blog_post.attachment %>
@@ -14,10 +9,14 @@
     </div>
   <% end %>
   <% href_link = blog_post.published? ? _blog_post_path(blog_post) : '' %>
-  <h2><%= link_to h(blog_post.name), href = href_link %></h2>
-  
+  <h2>
+    <% unless showing_individual_post %>
+        <%=link_to h(blog_post.name), href = href_link %>
+    <% end %>
+  </h2>
+
   <div class="date"><%= blog_post.published_at.to_s(:long) if blog_post.published? %></div>
-  
+
   <div class="body">
     <% if showing_individual_post or blog_post.summary.blank? %>
       <%= blog_post.body.html_safe %>
@@ -28,7 +27,7 @@
       </p>
     <% end %>
   </div>
-  
+
   <div class="meta">
     <% unless blog_post.category_id.blank? %>
       Posted in <%= link_to h(blog_post.category_name), _blog_path(blog_post.blog, 'posts_in_category', :category => blog_post.category_name) %>
@@ -42,10 +41,10 @@
       </span>
       <strong>|</strong>
     <% end %>
-    
+
     <%= link_to h(pluralize(blog_post.comments.published.count, "Comment")), "#{href_link}#comments" %>
   </div>
-  
+
   <br />
 
   <% comments = blog_post.comments.published.reject(&:new_record?) %>

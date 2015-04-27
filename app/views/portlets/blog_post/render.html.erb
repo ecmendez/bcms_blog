@@ -1,10 +1,10 @@
-<% 
+<%
 	logger.warn "Page title is: #{page_title}"
 	page_title "SOMETHING ELSE"
 	logger.warn "Now it's #{page_title}"
 %>
 <% use_page_title @blog_post.name %>
-<%= render :partial => "partials/blog_post", :object => @blog_post %>
+<%= render :partial => "bcms_blog/partials/blog_post", :object => @blog_post %>
 
 <div class="blog_comment_form">
   <%= cms_form_for @blog_comment, :url => cms.portlet_handler_path(:id=>@portlet.id, :handler=>'create_comment') do |f| %>
@@ -33,3 +33,4 @@
     </p>
   <% end %>
 </div>
+</p>

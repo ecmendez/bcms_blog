@@ -63,7 +63,7 @@ module BcmsBlog
         :template_file_name => "default.html.erb",
         :hidden => true
       )
-      page.create_connector(@blog, 'main')
+      page.create_connector(@blog, 'primary')
 
       create_route(page, "#{@blog.name}: Posts In Day",      "/#{@blog.name_for_path}/:year/:month/:day")
       create_route(page, "#{@blog.name}: Posts In Month",    "/#{@blog.name_for_path}/:year/:month")
@@ -131,7 +131,7 @@ module BcmsBlog
         :blog_id => @blog.id,
         :template => portlet_class.default_template,
         :connect_to_page_id => page.id,
-        :connect_to_container => "main",
+        :connect_to_container => "primary",
         :publish_on_save => true)
     end
   end

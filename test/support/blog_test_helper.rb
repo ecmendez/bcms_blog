@@ -23,7 +23,7 @@ module BlogTestHelper
 
   # Creates data specifically used on tests
   def create_test_data
-    template = %q[<% page_title @page_title || @blog.name %><%= render :partial => "partials/blog_post", :collection => @blog_posts %>"]
+    template = %q[<% page_title @page_title || @blog.name %><%= render :partial => "bcms_blog/partials/blog_post", :collection => @blog_posts %>"]
     @blog = BcmsBlog::Blog.create!(:name => "MyBlog", :template => template)
 
     @category_type = CategoryType.find_by_name("Blog Post")
