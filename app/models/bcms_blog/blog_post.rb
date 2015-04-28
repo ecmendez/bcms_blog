@@ -79,6 +79,11 @@ module BcmsBlog
       send("#{blog.name_for_path}_post_path", route_params)
     end
 
+    def href_path
+      path_params = route_params
+      "#{blog.name.parameterize.underscore}/#{path_params[:year]}/#{path_params[:month]}/#{path_params[:day]}/#{path_params[:slug]}"
+    end
+
     def route_name
       "#{blog.name_for_path}_post"
     end

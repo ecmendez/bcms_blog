@@ -1,0 +1,11 @@
+- blog = @page.contents.first
+- items = blog ? @page.contents.first.posts.to_a : ''
+-unless items.empty?
+  #navSectionTitle
+    =blog.name #The name of the blog is the title of the menu
+  %ul{:class => "leftNavBlock"}
+    -items.each do |item|
+      %li
+        %span{:class => ""}
+          =link_to h(item.name), href = item.href_path
+
