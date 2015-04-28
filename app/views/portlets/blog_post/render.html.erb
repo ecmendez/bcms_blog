@@ -6,7 +6,7 @@
 <% use_page_title @blog_post.name %>
 <%= render :partial => "bcms_blog/partials/blog_post", :object => @blog_post %>
 
-<div class="blog_comment_form">
+<p class="blog_comment_form">
   <%= cms_form_for @blog_comment, :url => cms.portlet_handler_path(:id=>@portlet.id, :handler=>'create_comment') do |f| %>
 
     <%= f.hidden_field :post_id %>
@@ -32,5 +32,4 @@
       <%= submit_tag "Submit comment" %>
     </p>
   <% end %>
-</div>
 </p>

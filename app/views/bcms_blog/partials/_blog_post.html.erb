@@ -2,7 +2,7 @@
    # params[:slug] is defined only if we pass :collection to the partial
    showing_individual_post = params.include?(:slug)
 %>
-<div id="blog_post_<%= blog_post.id %>" class="blog_post">
+<p id="blog_post_<%= blog_post.id %>" class="blog_post">
   <% if blog_post.attachment %>
     <div class="image">
       <%= image_tag blog_post.attachment.file_path %>
@@ -51,10 +51,10 @@
   <% if showing_individual_post and comments.any? -%>
     <h2>Comments</h2>
     <% comments.each_with_index do |comment, i| %>
-      <div class="comment <%= 'first' if i == 0 %>">
+      <p class="comment <%= 'first' if i == 0 %>">
         <%= h comment.body %>
         <p>&mdash;<%= comment.url.present? ? link_to(h(comment.author), comment.url) : h(comment.author) %></p>
-      </div>
+      </p>
     <% end %>
   <% end %>
-</div>
+</p>
