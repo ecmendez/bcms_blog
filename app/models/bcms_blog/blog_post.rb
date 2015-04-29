@@ -2,13 +2,14 @@ module BcmsBlog
   class BlogPost < ActiveRecord::Base
     self.table_name= 'cms_blog_posts'
     acts_as_content_block :taggable => true
-    # acts_as_likeable
+    acts_as_likeable
     has_attachment :file
 
     belongs_to :blog
     belongs_to_category
     belongs_to :author, :class_name => "Cms::PersistentUser"
     has_many :comments, :class_name => "BlogComment", :foreign_key => "post_id"
+    has_many :likes, :class_name => 'Like', :foreign_key => 'likeable_id'
 
     before_save :set_published_at
     before_validation :set_slug
@@ -69,6 +70,10 @@ module BcmsBlog
       [ {:label => 'Name', :method => :name, :order => 'name' },
         {:label => 'Blog (order by id)', :method => :blog_name, :order => 'blog_id' },
         {:label => 'Published At', :method => :published_label, :order => 'published_at' } ]
+    end
+
+    def is_liked_by(user)
+      user.like!(self)
     end
 
     def set_slug

@@ -11,6 +11,7 @@ end
 
 #rails 4 changes
 gem 'browsercms', git: 'https://github.com/jamesprior/browsercms' # for now, it has important changes
+gem 'socialization' #for likeable functionality
 gem 'coffee-rails'
 gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier'
