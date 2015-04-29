@@ -1,11 +1,13 @@
 - blog = @page.contents.first
-- items = blog ? @page.contents.first.posts.to_a : ''
--unless items.empty?
+- blog = BcmsBlog::Blog.find_by_id(blog.blog_id) unless blog.is_a?(BcmsBlog::Blog)
+- posts = blog ? blog.posts.to_a : ''
+
+-unless posts.empty?
   #navSectionTitle
     =blog.name #The name of the blog is the title of the menu
-  %ul{:class => "leftNavBlock"}
-    -items.each do |item|
+  %ul{:class => 'leftNavBlock'}
+    -posts.each do |post|
       %li
         %span{:class => ""}
-          =link_to h(item.name), href = item.href_path
+          =link_to h(post.name), href = post.href_path
 

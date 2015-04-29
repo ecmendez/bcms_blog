@@ -81,7 +81,7 @@ module BcmsBlog
 
     def href_path
       path_params = route_params
-      "#{blog.name.parameterize.underscore}/#{path_params[:year]}/#{path_params[:month]}/#{path_params[:day]}/#{path_params[:slug]}"
+      "/#{blog.name.parameterize.underscore}/#{path_params[:year]}/#{path_params[:month]}/#{path_params[:day]}/#{path_params[:slug]}"
     end
 
     def route_name
