@@ -9,7 +9,7 @@ module BcmsBlog
     belongs_to_category
     belongs_to :author, :polymorphic => true
     has_many :comments, :class_name => "BlogComment", :foreign_key => "post_id"
-    has_many :likes, :class_name => 'Like', :foreign_key => 'likeable_id'
+    # has_many :likes, :class_name => 'Like', :foreign_key => 'likeable_id'
 
     before_save :set_published_at
     before_validation :set_slug

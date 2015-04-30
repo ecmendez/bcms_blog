@@ -6,7 +6,7 @@ module BcmsBlog
     has_many :posts, ->{where(:published => true).order('published_at desc')}, :class_name => "BlogPost"
     has_many :blog_group_memberships
     has_many :groups, :through => :blog_group_memberships, :class_name=>'Cms::Group'
-    has_many :likes, :through => :blog_post, :class_name=>'Like'
+    # has_many :likes, :through => :blog_post, :class_name=>'Like'
 
     # attr_accessible :group_ids
     
