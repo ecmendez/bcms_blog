@@ -14,13 +14,13 @@ module BcmsBlog
       auto_discovery_link_tag(:rss, main_app.blog_feeds_url(:blog_id => blog), :title => "#{blog.name}")
     end
 
-    def likes(user, post)
-      post.is_liked_by(user)
-    end
-
-    def likes_counter(post)
-      Like.where(likeable_id: post.id).count
-    end
+    # def likes(user, post)
+    #   post.is_liked_by(user)
+    # end
+    #
+    # def likes_counter(post)
+    #   Like.where(likeable_id: post.id).count
+    # end
   
     # def new_comment_params(portlet)
     #   {:url=> Cms::Engine.routes.url_helpers.portlet_handler_path(:id=>portlet.id, :handler=>'create_comment'),
