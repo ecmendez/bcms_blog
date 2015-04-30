@@ -2,7 +2,7 @@ module BcmsBlog
   class BlogPost < ActiveRecord::Base
     self.table_name= 'cms_blog_posts'
     acts_as_content_block :taggable => true
-    acts_as_likeable
+    # acts_as_likeable
     has_attachment :file
 
     belongs_to :blog
