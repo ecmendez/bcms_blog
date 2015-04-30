@@ -1,5 +1,14 @@
 class BcmsBlog::BlogCommentsController < Cms::ContentBlockController
+  after_filter :check_if_published, :only => :update
+
   private
+
+  def check_if_published
+    if params[:commit].parameterize.underscore.eql?('publish')
+      model_class.find(params[:id].to_i).publish!
+    end
+  end
+
   def blog_comment_params
     params.require(:blog_comment).permit(
         :name,
