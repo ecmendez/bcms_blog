@@ -52,12 +52,10 @@
   <% if showing_individual_post and comments.any? -%>
     <h2>Comments</h2>
     <% comments.each_with_index do |comment, i| %>
-    <p>
-      <div class="comment <%= 'first' if i == 0 %>">
+      <div class="comment">
         <%= h comment.body %>
         <div class="comment-author">&mdash;<%= comment.url.present? ? link_to(h(comment.author), comment.url) : h(comment.author) %></div>
       </div>
-    </p>
     <% end %>
   <% end %>
 </p>
