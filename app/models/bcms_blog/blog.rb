@@ -17,9 +17,9 @@ module BcmsBlog
       user.able_to?(:edit_content) ? where("cms_groups.id IN (#{user.group_ids.join(',')})").joins(:groups) : []
     }
 
-    has_many :posts_by_likes, -> {
-      joins(:likes).group('cms_blog_posts.id').select('cms_blog_posts.*, count(likes.id) as count_all').order('count_all desc')
-    }, :class_name => 'BlogPost'
+    # has_many :posts_by_likes, -> {
+    #   joins(:likes).group('cms_blog_posts.id').select('cms_blog_posts.*, count(likes.id) as count_all').order('count_all desc')
+    # }, :class_name => 'BlogPost'
     
     def self.default_template
       template_file = ActionController::Base.view_paths.map do |vp|
@@ -47,7 +47,8 @@ module BcmsBlog
 
     def render
       @blog = self
-      finder = @blog.posts_by_likes.published
+      # finder = @blog.posts_by_likes.published
+      finder = @blog.posts.published
       finder = Blog.posts_finder(finder, params)
 
       if params[:year] && params[:month] && params[:day]
