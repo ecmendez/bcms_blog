@@ -2,7 +2,7 @@ module BcmsBlog
   class BlogComment < ActiveRecord::Base
     self.table_name= 'cms_blog_comments'
 
-    acts_as_content_block :is_searachable => "body", :userstamped => false
+    acts_as_content_block :is_searchable => {:searchable_columns => ['body']}, :userstamped => false
     belongs_to :created_by, :polymorphic => true
     belongs_to :updated_by, :polymorphic => true
     belongs_to :post, :class_name => "BlogPost", :counter_cache => "comments_count"
@@ -31,6 +31,9 @@ module BcmsBlog
         {:label => "Created At", :method => :formatted_created_at, :order => "created_at"} ]
     end
 
+    def name
+      body ? body[0..50] : ""
+    end
 
 
     def self.permitted_params
@@ -39,9 +42,6 @@ module BcmsBlog
 
     private
 
-    def name
-      body ? body[0..50] : ""
-    end
 
     def post_name
       self.post.name
