@@ -26,10 +26,13 @@ class BlogPostPortlet < Cms::Portlet
   end
 
   def create_comment
-    # work_around_cms_3_3_bug_where_current_user_is_not_correctly_set
     params[:blog_comment].merge! :ip => request.remote_ip
     blog_comment = BcmsBlog::BlogComment.new(blog_comment_params)
 
+    blog_comment.update_attributes(created_by: Cms::User.current,
+                                   updated_by: Cms::User.current ,
+                                   created_by_type:Cms::User.current.class.to_s ,
+                                   updated_by_type:Cms::User.current.class.to_s )
     if blog_comment.valid? && blog_comment.save
       url_for_success
     else
@@ -40,12 +43,6 @@ class BlogPostPortlet < Cms::Portlet
   end
 
   private
-  # TODO: remove this method and its call in the method above if it is working everything so far
-  def work_around_cms_3_3_bug_where_current_user_is_not_correctly_set
-    # Cms::User.current = current_user
-    Cms::PersistentUser.current = current_user
-  end
-
   # This is a work around for a bug in bcms 3.3 where the Cms::PageHelper#page_title doesnt
   #   share state between the portlet view and the page view.
   #   When the portlet view (app/views/portlets/blog_post/render) calls 'page_title @post.name'

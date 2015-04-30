@@ -19,6 +19,31 @@ class BcmsBlog::BlogPostsController < Cms::ContentBlockController
 
   private
 
+  def blog_post_params
+    params.require(:blog_post).permit(
+        :blog_id,
+        :author_id,
+        :category_id,
+        :name,
+        :slug,
+        :summary,
+        :body,
+        :comments_count,
+        :published_at,
+        :attachment_id,
+        :attachment_version,
+        :version,
+        :lock_version,
+        :published,
+        :deleted,
+        :archived,
+        :created_by_id,
+        :updated_by_id,
+        :created_at,
+        :updated_at
+    )
+  end
+
     # If the current user is not able to edit any blog, just show them a page saying so
     def show_no_access_if_none_editable
       if BcmsBlog::Blog.editable_by(current_user).empty?

@@ -2,7 +2,9 @@ module BcmsBlog
   class BlogComment < ActiveRecord::Base
     self.table_name= 'cms_blog_comments'
 
-    acts_as_content_block :is_searachable => "body"
+    acts_as_content_block :is_searachable => "body", :userstamped => false
+    belongs_to :created_by, :polymorphic => true
+    belongs_to :updated_by, :polymorphic => true
     belongs_to :post, :class_name => "BlogPost", :counter_cache => "comments_count"
 
     validates_presence_of :post_id, :author, :body
