@@ -54,6 +54,6 @@ class BlogPostPortlet < Cms::Portlet
   end
 
   def blog_comment_params
-    params[:blog_comment].permit(BcmsBlog::BlogComment.permitted_params)
+    params[:blog_comment].permit(BcmsBlog::BlogComment.permitted_params) unless params[:blog_comment].nil?
   end
 end
