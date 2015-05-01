@@ -47,7 +47,14 @@ class BlogPostPortlet < Cms::Portlet
     liker = params[:liker_type].constantize.find_by_id(params[:liker])
 
     if blog_post && liker
+      begin
         blog_post.is_liked_by!(liker)
+        url_for_success
+      rescue
+        store_params_in_flash
+        store_errors_in_flash(blog_post.errors)
+        url_for_failure
+      end
     end
   end
 

@@ -43,10 +43,11 @@
     <% end %>
 
     <%= link_to h(pluralize(blog_post.comments.published.count, "Comment")), "#{href_link}#comments" %>
+    |
     <% if @portlet%>
         <%= link_to("#{blog_post.likes.count} Like", like_comment(current_user, blog_post), :method=> :post) %>
     <% else %>
-        <%= link_to("#{blog_post.likes.count} Like", href_link) %>
+        <%= "#{blog_post.likes.count} Likes" %>
     <% end %>
   </div>
 
