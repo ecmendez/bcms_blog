@@ -76,6 +76,7 @@ module BcmsBlog
       unless exist_relation
         relation = Like.likers_relation!(user,self)
       end
+      return true
     end
 
     def set_slug
