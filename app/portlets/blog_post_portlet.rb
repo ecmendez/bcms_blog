@@ -42,6 +42,22 @@ class BlogPostPortlet < Cms::Portlet
     end
   end
 
+  def like_comment
+    blog_post = BcmsBlog::BlogPost.find_by_id(params[:blog_post])
+    liker = params[:liker_type].constantize.find_by_id(params[:liker])
+
+    if blog_post && liker
+      begin
+        blog_post.is_liked_by!(liker)
+        url_for_success
+      rescue
+        store_params_in_flash
+        store_errors_in_flash(blog_post.errors)
+        url_for_failure
+      end
+    end
+  end
+
   private
   # This is a work around for a bug in bcms 3.3 where the Cms::PageHelper#page_title doesnt
   #   share state between the portlet view and the page view.

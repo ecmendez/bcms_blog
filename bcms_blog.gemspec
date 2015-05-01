@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
   s.test_files += Dir["test/**/*"]
   s.test_files -= Dir['test/dummy/**/*']
   
-  # s.add_dependency("browsercms")
+  s.add_dependency('socialization','1.1.0')
  
 
 end

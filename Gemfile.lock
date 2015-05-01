@@ -24,6 +24,7 @@ PATH
   remote: .
   specs:
     bcms_blog (2.1.1)
+      socialization (= 1.1.0)
 
 GEM
   remote: http://rubygems.org/
@@ -209,5 +210,4 @@ DEPENDENCIES
   rails (= 4.1.6)
   rails-observers
   sass-rails (~> 4.0.3)
-  socialization
   uglifier

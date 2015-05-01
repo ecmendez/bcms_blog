@@ -3,13 +3,10 @@ module BcmsBlog
     self.table_name= 'cms_blogs'
     acts_as_content_block
   
-    has_many :posts, ->{where(:published => true).order('published_at desc')}, :class_name => "BlogPost"
+    has_many :posts, ->{where(:published => true).order('likes_count desc, published_at desc')}, :class_name => "BlogPost"
     has_many :blog_group_memberships
     has_many :groups, :through => :blog_group_memberships, :class_name=>'Cms::Group'
-    # has_many :likes, :through => :blog_post, :class_name=>'Like'
 
-    # attr_accessible :group_ids
-    
     validates_presence_of :name
     validates_uniqueness_of :name
 
@@ -17,10 +14,6 @@ module BcmsBlog
       user.able_to?(:edit_content) ? where("cms_groups.id IN (#{user.group_ids.join(',')})").joins(:groups) : []
     }
 
-    # has_many :posts_by_likes, -> {
-    #   joins(:likes).group('cms_blog_posts.id').select('cms_blog_posts.*, count(likes.id) as count_all').order('count_all desc')
-    # }, :class_name => 'BlogPost'
-    
     def self.default_template
       template_file = ActionController::Base.view_paths.map do |vp|
         path = vp.to_s.first == "/" ? vp.to_s : File.join(Rails.root, vp.to_s)
@@ -47,7 +40,6 @@ module BcmsBlog
 
     def render
       @blog = self
-      # finder = @blog.posts_by_likes.published
       finder = @blog.posts.published
       finder = Blog.posts_finder(finder, params)
 
@@ -62,7 +54,7 @@ module BcmsBlog
         finder = posts.published_between(@date, @date + 1.year)
       end
 
-      @blog_posts = finder.all.order('published_at desc').limit(25) #(:limit => 25, :order => "published_at desc")
+      @blog_posts = finder.all.order('published_at desc').limit(25)
       raise ActiveRecord::RecordNotFound.new("No posts found") if @blog_posts.empty?
 
       if params[:category]

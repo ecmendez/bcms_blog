@@ -43,7 +43,7 @@
     <% end %>
 
     <%= link_to h(pluralize(blog_post.comments.published.count, "Comment")), "#{href_link}#comments" %>
-    <%#= link_to("#{likes_counter(blog_post)} Like", likes(current_user, blog_post)) %>
+    <%= link_to("#{blog_post.likes.count} Like", like_comment(current_user, blog_post)) %>
   </div>
 
   <br />
