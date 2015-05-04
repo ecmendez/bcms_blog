@@ -35,6 +35,14 @@ module BcmsBlog
       body ? body[0..50] : ""
     end
 
+    def website
+      if !url.starts_with?('http')
+      "http://#{url}"
+      else
+        url
+      end
+    end
+
 
     def self.permitted_params
       attribute_names.map{|string| string.to_sym}

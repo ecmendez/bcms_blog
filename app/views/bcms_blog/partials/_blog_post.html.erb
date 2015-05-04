@@ -53,8 +53,8 @@
     <h2>Comments</h2>
     <% comments.each_with_index do |comment, i| %>
       <div class="comment">
-        <%= h comment.body %>
-        <div class="comment-author">&mdash;<%= comment.url.present? ? link_to(h(comment.author), comment.url) : h(comment.author) %></div>
+        <%= simple_format(comment.body) %>
+        <div class="comment-author">&mdash;<%= comment.url.present? ? link_to(h(comment.author), comment.website, :target => "_blank") : h(comment.author) %></div>
       </div>
     <% end %>
   <% end %>
