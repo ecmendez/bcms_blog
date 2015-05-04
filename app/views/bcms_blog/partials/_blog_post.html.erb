@@ -44,17 +44,21 @@
 
     <%= link_to h(pluralize(blog_post.comments.published.count, "Comment")), "#{href_link}#comments" %>
     |
-    <% if @portlet%>
-        <%= link_to("#{blog_post.likes.count} Like", like_comment(current_user, blog_post), :method=> :post) %>
-    <% else %>
-        <%= "#{blog_post.likes.count} Likes" %>
-    <% end %>
+    <%= link_to "#{blog_post.likes.count} Likes", "#{href_link}" %>
   </div>
 
   <br />
 
   <% comments = blog_post.comments.published.reject(&:new_record?) %>
   <% if showing_individual_post and comments.any? -%>
+    <div class="'like">
+        <% if do_you_like?(current_user, blog_post) %>
+            You like this post.
+        <% else %>
+            Click <a href ="<%=like_comment(current_user, blog_post)%>" data-method="post">here</a> if you like this post.
+        <% end %>
+    </div>
+    </br>
     <h2>Comments</h2>
     <% comments.each_with_index do |comment, i| %>
       <div class="comment">

@@ -3,7 +3,7 @@ module BcmsBlog
     self.table_name= 'cms_blogs'
     acts_as_content_block
   
-    has_many :posts, ->{where(:published => true).order('likes_count desc, published_at desc')}, :class_name => "BlogPost"
+    has_many :posts, ->{joins(:likes).group('cms_blog_posts.id').where(:published => true).joins(:likes).order('count(cms_likes.id) desc, published_at desc')}, :class_name => "BlogPost"
     has_many :blog_group_memberships
     has_many :groups, :through => :blog_group_memberships, :class_name=>'Cms::Group'
 

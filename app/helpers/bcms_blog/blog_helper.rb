@@ -18,5 +18,9 @@ module BcmsBlog
       Cms::Engine.routes.url_helpers.portlet_handler_path(:id=>@portlet.id, :handler=>'like_comment', :liker => user, :liker_type => user.class.to_s, :blog_post => blog_post)
     end
 
+    def do_you_like?(user, blog_post)
+      Like.likes?(user, blog_post)
+    end
+
   end
 end
