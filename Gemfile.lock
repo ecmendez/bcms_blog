@@ -24,7 +24,6 @@ PATH
   remote: .
   specs:
     bcms_blog (2.1.1)
-      socialization (= 1.1.0)
 
 GEM
   remote: http://rubygems.org/
@@ -163,8 +162,6 @@ GEM
     simple_form (3.1.0.rc2)
       actionpack (~> 4.0)
       activemodel (~> 4.0)
-    socialization (1.1.0)
-      activerecord
     sprockets (2.11.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
