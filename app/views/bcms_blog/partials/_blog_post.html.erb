@@ -43,25 +43,17 @@
     <% end %>
 
     <%= link_to h(pluralize(blog_post.comments.published.count, "Comment")), "#{href_link}#comments" %>
-    |
-    <%= link_to "#{blog_post.likes.count} Likes", "#{href_link}" %>
   </div>
 
   <br />
 
-  <% comments = blog_post.comments.published.reject(&:new_record?) %>
+  <% comments = blog_post.comments.published.ordered_by_likes.reject(&:new_record?) %>
   <% if showing_individual_post and comments.any? -%>
-    <div class="'like">
-        <% if do_you_like?(current_user, blog_post) %>
-            You like this post.
-        <% else %>
-            Click <a href ="<%=like_comment(current_user, blog_post)%>" data-method="post">here</a> if you like this post.
-        <% end %>
-    </div>
-    </br>
     <h2>Comments</h2>
     <% comments.each_with_index do |comment, i| %>
       <div class="comment">
+        <div class="like-button <%='checked' if already_like?(current_user, comment) %>"> <%= link_to "Like", "#{like_comment(current_user, comment)}", :method => 'post' %></div>
+        <div class="'like-counter"><%= comment.likes.count %></div>
         <%= simple_format(comment.body) %>
         <div class="comment-author">&mdash;<%= comment.url.present? ? link_to(h(comment.author), comment.website, :target => "_blank") : h(comment.author) %></div>
       </div>

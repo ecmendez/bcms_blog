@@ -14,12 +14,12 @@ module BcmsBlog
       auto_discovery_link_tag(:rss, main_app.blog_feeds_url(:blog_id => blog), :title => "#{blog.name}")
     end
 
-    def like_comment(user, blog_post)
-      Cms::Engine.routes.url_helpers.portlet_handler_path(:id=>@portlet.id, :handler=>'like_comment', :liker => user, :liker_type => user.class.to_s, :blog_post => blog_post)
+    def like_comment(user, blog_comment)
+      Cms::Engine.routes.url_helpers.portlet_handler_path(:id=>@portlet.id, :handler=>'like_comment', :liker => user, :liker_type => user.class.to_s, :blog_comment => blog_comment)
     end
 
-    def do_you_like?(user, blog_post)
-      Like.likes?(user, blog_post)
+    def already_like?(user, blog_comment)
+      Like.likes?(user, blog_comment)
     end
 
   end

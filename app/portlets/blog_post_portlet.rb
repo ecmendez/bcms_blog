@@ -43,16 +43,16 @@ class BlogPostPortlet < Cms::Portlet
   end
 
   def like_comment
-    blog_post = BcmsBlog::BlogPost.find_by_id(params[:blog_post])
+    blog_comment = BcmsBlog::BlogComment.find_by_id(params[:blog_comment])
     liker = params[:liker_type].constantize.find_by_id(params[:liker])
 
-    if blog_post && liker
+    if blog_comment && liker
       begin
-        blog_post.is_liked_by!(liker)
+        blog_comment.is_liked_by!(liker)
         url_for_success
       rescue
         store_params_in_flash
-        store_errors_in_flash(blog_post.errors)
+        store_errors_in_flash(blog_comment.errors)
         url_for_failure
       end
     end
