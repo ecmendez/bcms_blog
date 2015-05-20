@@ -58,7 +58,10 @@
         </div>
         <div class="like-counter"><%= comment.likes.count %></div>
         <%= simple_format(comment.body) %>
-        <div class="comment-author">&mdash;<%= comment.url.present? ? link_to(h(comment.author), comment.website, :target => '_blank') : h(comment.author) %></div>
+        <div class="comment-author">
+          <%= comment.url.present? ? link_to(h(comment.author), comment.website, :target => '_blank') + " " : "#{h(comment.author)} " %>
+          <%=comment.created_at.strftime("%m/%d/%Y %I:%M %p") %>
+        </div>
       </div>
     <% end %>
   <% end %>
