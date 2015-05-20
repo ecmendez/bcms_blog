@@ -8,7 +8,7 @@ module BcmsBlog
     belongs_to :post, :class_name => "BlogPost", :counter_cache => "comments_count"
     has_many :likes, :class_name => "Like", :foreign_key => "likeable_id"
 
-    validates_presence_of :post_id, :author, :body
+    validates_presence_of :post_id, :body
   
     before_create :publish_if_comments_are_enabled
 
