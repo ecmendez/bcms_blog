@@ -79,7 +79,10 @@ module BcmsBlog
     end
 
     def editable_by?(user)
-      user.able_to?(:administrate) || !(group_ids & user.group_ids).empty?
+      # user.able_to?(:administrate) || !(group_ids & user.group_ids).empty?
+      groups = group_ids & user.group_ids
+      can_edit = groups.empty? ? false : BcmsBlog::BlogGroupMembership.where('group_id in (?)',groups).map(&:blog_id).include?(self.id)
+      user.able_to?(:administrate) || can_edit
     end
 
     def potential_authors

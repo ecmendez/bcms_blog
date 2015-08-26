@@ -12,9 +12,31 @@ class BcmsBlog::BlogPostsController < Cms::ContentBlockController
     ensure_blog_editable
   end
 
+  # this is the same method called from BrowserCMS on controllers/cms/content_block_controller.rb
+  # it was needed to move it here to add the extra layout of verification and avoid to show the
+  # posts that are not allowed to see based on permissions
   def load_blocks
-    super
-    @blocks.to_a.delete_if { |b| !b.editable_by?(current_user) }
+    @search_filter = Cms::SearchFilter.build(params[:search_filter], model_class)
+
+    scope = model_class.respond_to?(:list) ? model_class.list : model_class
+    if scope.searchable?
+      scope = scope.search(@search_filter.term)
+    end
+    if params[:section_id] && model_class.respond_to?(:with_parent_id)
+      scope = scope.with_parent_id(params[:section_id])
+    end
+
+    if params[:order].present?
+      scope = scope.reorder(params[:order])
+    elsif model_class.respond_to?(:default_order)
+      scope = scope.reorder(model_class.default_order)
+    end
+
+    authorized = scope.to_a.select{|b| b.editable_by?(current_user)}
+
+    @total_number_of_items = authorized.count
+    @blocks = authorized.paginate(:page => params[:page])
+    check_permissions
   end
 
   private
