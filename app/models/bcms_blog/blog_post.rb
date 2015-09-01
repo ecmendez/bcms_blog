@@ -7,7 +7,7 @@ module BcmsBlog
     belongs_to :blog
     belongs_to_category
     belongs_to :author, :polymorphic => true
-    has_many :comments, ->{where(:published => true, :deleted => false).order('updated_at desc')}, :class_name => "BlogComment", :foreign_key => "post_id"
+    has_many :comments, ->{where(:deleted => false)}, :class_name => "BlogComment", :foreign_key => "post_id"
 
     before_save :set_published_at
     before_validation :set_slug
