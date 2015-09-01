@@ -21,7 +21,7 @@ class BcmsBlog::BlogCommentsController < Cms::ContentBlockController
       scope = scope.reorder(model_class.default_order)
     end
 
-    authorized = scope.to_a.select{|b| b.post.editable_by?(current_user)}
+    authorized = scope.to_a.select{|b| !b.deleted? && !b.post.deleted? && b.post.editable_by?(current_user)}
 
     @total_number_of_items = authorized.count
     @blocks = authorized.paginate(:page => params[:page])
