@@ -1,9 +1,16 @@
 # Blog Module for BrowserCMS
 
-A simple blog module that lets users create multiple blogs. 
+A simple blog module that lets users create multiple blogs.
+
+## Upcoming fixes on rails4
+* Rename/Delete blog.
+* Duplicated post rendered if it is created as a connectable.
+
+## ATTENTION!!!
+
+### 1. DO NOT create a blog with the word '_blog' in the name, it will create redirections problems.
 
 ## Features
-
 * Multiple Blogs - Contributors can create multiple blogs, each of which can have their own sections and pages.
 * Convenient setup - Creating a new blog will automatically create the pages and portlets needed to get started.
 * Tagging - Leverages BrowserCMS' built-in categorization and tagging and authorization framework.
