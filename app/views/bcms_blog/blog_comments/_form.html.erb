@@ -1,4 +1,4 @@
-<% authorized_posts = BcmsBlog::BlogPost.all.order(:name).select{|p| p.blog.editable_by?(current_user) }%>
+<% authorized_posts = BcmsBlog::BlogPost.all.order(:name).select{|p| p.blog && p.blog.editable_by?(current_user) }%>
 <%= f.cms_drop_down :post_id, authorized_posts.map{|p| [p.name, p.id]} %>
 <%= f.cms_text_field :author %>
 <%= f.cms_text_field :email %>

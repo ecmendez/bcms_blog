@@ -100,6 +100,11 @@ module BcmsBlog
 
         Cms::Section.find_by_name(old_blog_name).update_attribute(:name, blog.name)
         Cms::PageRoute.find_by_name("#{old_blog_name}: Post").update_attribute(:name, "#{blog.name}: Post")
+        Cms::PageRoute.find_by_name("#{old_blog_name}: Posts In Day").update_attribute(:name, "#{blog.name}: Posts In Day")
+        Cms::PageRoute.find_by_name("#{old_blog_name}: Posts In Month").update_attribute(:name, "#{blog.name}: Posts In Month")
+        Cms::PageRoute.find_by_name("#{old_blog_name}: Posts In Year").update_attribute(:name, "#{blog.name}: Posts In Year")
+        Cms::PageRoute.find_by_name("#{old_blog_name}: Posts With Tag").update_attribute(:name, "#{blog.name}: Posts With Tag")
+        Cms::PageRoute.find_by_name("#{old_blog_name}: Posts In Category").update_attribute(:name, "#{blog.name}: Posts In Category")
 
         page = Cms::Page.find_by_name("#{old_blog_name}: Post")
         page.update_attribute(:name, "#{blog.name}: Post")

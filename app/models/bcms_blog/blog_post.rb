@@ -61,13 +61,13 @@ module BcmsBlog
     end
 
     def self.default_order
-      'created_at desc'
+      "#{table_name}.created_at desc"
     end
 
     def self.columns_for_index
-      [ {:label => 'Name', :method => :name, :order => 'name' },
-        {:label => 'Blog (order by id)', :method => :blog_name, :order => 'blog_id' },
-        {:label => 'Published At', :method => :published_label, :order => 'published_at' } ]
+      [ {:label => 'Name', :method => :name, :order => "#{table_name}.name" },
+        {:label => 'Blog (order by id)', :method => :blog_name, :order => "#{table_name}.blog_id" },
+        {:label => 'Published At', :method => :published_label, :order => "#{table_name}.published_at" } ]
     end
 
     def set_slug

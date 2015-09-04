@@ -22,7 +22,7 @@ module BcmsBlog
     end
 
     def self.default_order
-      "created_at desc"
+      "#{table_name}.created_at desc"
     end
 
     def self.default_order_for_search
@@ -30,10 +30,10 @@ module BcmsBlog
     end
 
     def self.columns_for_index
-      [ {:label => "Comment",    :method => :name,                 :order => "body" },
-        {:label => "Post (order by id)",    :method => :post_name, :order => "post_id" },
+      [ {:label => "Comment",    :method => :name,                 :order => "#{table_name}.body" },
+        {:label => "Post (order by id)",    :method => :post_name, :order => "#{table_name}.post_id" },
         {:label => "Blog",    :method => :blog_name},
-        {:label => "Created At", :method => :formatted_created_at, :order => "created_at"} ]
+        {:label => "Created At", :method => :formatted_created_at, :order => "#{table_name}.created_at"} ]
     end
 
     def name

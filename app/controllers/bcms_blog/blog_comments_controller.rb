@@ -20,7 +20,7 @@ class BcmsBlog::BlogCommentsController < Cms::ContentBlockController
     elsif model_class.respond_to?(:default_order)
       scope = scope.reorder(model_class.default_order)
     end
-
+    scope = scope.eager_load(post: :blog).where('cms_blogs.deleted = 0 and cms_blog_posts.deleted = 0')
     authorized = scope.to_a.select{|b| !b.deleted? && !b.post.deleted? && b.post.editable_by?(current_user)}
 
     @total_number_of_items = authorized.count

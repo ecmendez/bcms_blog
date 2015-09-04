@@ -75,7 +75,7 @@ module BcmsBlog
     end
 
     def self.default_order
-      "name"
+      "#{table_name}.name"
     end
 
     def editable_by?(user)
